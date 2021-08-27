@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>v-for循环对象的方法</title>
+    <script src="./vue3.js"></script>
+</head>
+
+<body>
+    <div id="app"></div>
+</body>
+<script>
+    // v-for不仅可以循环数组，还可以循环对象，使用方法基本和数组一样
+    const app = Vue.createApp({
+        data() {
+            return {
+                listObject: {
+                    GirlOne: '谢大脚',
+                    GirlTwo: '刘英',
+                    GirlThree: '晓红'
+                }
+            }
+        },
+        // 官方不建议使用索引index为key值，但此时又为了保持唯一性，所以这里使用了index+item进行绑定key值
+        template: `
+           <ul>
+             <li v-for="(value,key,index)  in listObject" :key="key">
+                [{{index}}]{{value}}-{{key}}
+             </li>
+          </ul> 
+        `
+        // [0]谢大脚-GirlOne
+        // [1]刘英-GirlTwo
+        // [2]晓红-GirlThree
+    })
+
+    app.mount("#app")
+</script>
+
+</html>
+
+<style>
+    .red {
+        color: red !important;
+    }
+
+    .green {
+        color: green;
+    }
+
+    .background {
+        background-color: orange;
+    }
+</style>

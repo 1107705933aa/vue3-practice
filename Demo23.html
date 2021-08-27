@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>v-for中如何使用判断</title>
+    <script src="./vue3.js"></script>
+</head>
+
+<body>
+    <div id="app"></div>
+</body>
+<script>
+    // v-for不仅可以循环数组，还可以循环对象，使用方法基本和数组一样
+    const app = Vue.createApp({
+        data() {
+            return {
+                listArray: {
+                    GirlOne: '谢大脚',
+                    GirlTwo: '刘英',
+                    GirlThree: '晓红'
+                }
+            }
+        },
+        // 在浏览器中进行预览，你会发现谢大脚的循环项，并没有消失。
+        // 这是为什么那？因为v-for循环的优先级要高于v-if判断的优先级，所以判断失效。
+        // 正确的写法应该是在<li>外层独立出一个标签，在<li>上做循环。
+        template: `
+        <ul>
+          <li 
+            v-for="(item,index) in listArray"
+            :key="index+item"
+            v-if="item != '谢大脚'"
+            >
+                [{{index}}]{{item}}
+          </li>
+       </ul>
+        `
+    })
+
+    app.mount("#app")
+</script>
+
+</html>
+
+<style>
+    .red {
+        color: red !important;
+    }
+
+    .green {
+        color: green;
+    }
+
+    .background {
+        background-color: orange;
+    }
+</style>

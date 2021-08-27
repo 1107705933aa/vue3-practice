@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>v-for</title>
+    <script src="https://unpkg.com/vue@next"></script>
+</head>
+
+<body>
+    <div id="app"></div>
+</body>
+<script>
+    const app = Vue.createApp({
+        data() {
+            return {
+                listArray:['谢大脚','刘英','晓红']
+            }
+        },
+        methods: {
+            handleChangeBtnClick() {
+                this.listArray.push('JSPang.com')
+            },
+        },
+        // 官方不建议使用索引index为key值，但此时又为了保持唯一性，所以这里使用了index+item进行绑定key值
+        template: `
+           <button @click="handleChangeBtnClick">点我改变</button>
+           <ul>
+             <li v-for="(item,index)  in listArray" :key="index+item">
+                [{{index}}]{{item}}
+             </li>
+          </ul> 
+        `
+    })
+
+    app.component('sonCom', {
+        template: `
+        <h2>JSPang.com</h2>
+        `
+    })
+
+    app.mount("#app")
+</script>
+
+</html>
+
+<style>
+    .red {
+        color: red !important;
+    }
+
+    .green {
+        color: green;
+    }
+
+    .background {
+        background-color: orange;
+    }
+</style>

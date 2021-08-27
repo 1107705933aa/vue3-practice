@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Demo6</title>
+    <script src="https://unpkg.com/vue@next"></script>
+</head>
+
+<body>
+    <div id="app"></div>
+    <!-- Vue的编程设计模式应该叫做mvvm的设计模式。什么叫做mvvm哪？它首先是面向数据的编程，
+    程序中定义了数据，然后定义了模板，Vue就可以把数据和模板自动进行关联。最后挂载到真实的DOM上，展示给用户。
+
+    mvvm解释: 第一个m代表model数据，第一个v代表view视图，最后两个字幕vm代表viewModel视图数据连接层。 -->
+</body>
+<script>
+    const app = Vue.createApp({
+        data() {
+            return {
+                message: 'jspang.com'   //1.在这里定义了数据，也就是`model`数据
+            }
+        },
+        template: "<h2>{{message}}</h2>" //2.在这里定义了模板，也就是`view`，
+        //定义后的自动关联，就叫做`vm`，viewModel数据视图连接层。
+    })
+    const vm = app.mount("#app")
+    vm.$data.message = '技术胖'
+    // app.mount("#app")
+    // console.log(vm)
+</script>
+
+</html>

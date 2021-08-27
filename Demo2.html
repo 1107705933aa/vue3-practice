@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Demo2计数器</title>
+    <script src="https://unpkg.com/vue@next"></script>
+</head>
+
+<body>
+    <div id="app"></div>
+</body>
+<script>
+    Vue.createApp({   //创建一个Vue实例，简单理解就说，我要使用Vue了
+        data() {
+            return {
+                counter: 1
+            }
+        },
+        // 从面向DOM编程，改为面向数据编程
+        mounted() {
+            console.log('页面加载完成后-自动执行')
+            setInterval(() => {
+                this.counter += 1
+            }, 1000)
+        },
+        template: '<div>{{counter}}</div>'   // template是模板的意思，就是在JS里写html代码
+    }).mount("#app")   //这个模板需要放一个位置，也就是说挂载，挂载到`id=app`的DOM上
+</script>
+
+</html>

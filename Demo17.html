@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>模板样式绑定详细讲解</title>
+    <script src="https://unpkg.com/vue@next"></script>
+</head>
+
+<body>
+    <div id="app"></div>
+</body>
+<script>
+    const app = Vue.createApp({
+        data() {
+            return {
+                classString: 'red',
+                classObject:{red:true,background:true},
+                classArray:['green','background'],
+                classArray2:['green','background',{red:true}],
+            }
+        },
+
+        template: `
+            <h2 :class="classString">JSPang.com</h2> 
+            <h2 :class="classObject">技术胖</h2>  
+            <h2 :class="classArray">胖胖胖</h2>
+            <h2 :class="classArray2">混合绑定</h2>
+        `
+    })
+    const vm = app.mount("#app")
+    vm.$data.classString='green'
+</script>
+
+</html>
+
+<style>
+    .red {
+        color: red !important;
+    }
+
+    .green {
+        color: green;
+    }
+
+    .background {
+        background-color: orange;
+    }
+</style>

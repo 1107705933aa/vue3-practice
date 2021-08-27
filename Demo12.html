@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>三元运算符控制模板样式</title>
+    <script src="https://unpkg.com/vue@next"></script>
+</head>
+
+<body>
+    <div id="app"></div>
+</body>
+<script>
+    const app = Vue.createApp({
+        data() {
+            return {
+                message: 'jspang.com',
+            }
+        },
+        methods: {
+            handleItemClick() {
+                this.message = this.message == 'jspang.com' ? "技术胖" : "jspang.com"
+            }
+        },
+        template: `<h2 
+                    :class="message=='jspang.com'?'one':'two'" 
+                    @click="handleItemClick" >
+                    {{message}}
+                 </h2>`
+    })
+    const vm = app.mount("#app")
+
+</script>
+
+</html>
+<style>
+    .one {
+        color: red;
+    }
+
+    .two {
+        color: green;
+    }
+</style>

@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>template模版标签</title>
+    <script src="./vue3.js"></script>
+</head>
+
+<body>
+    <div id="app"></div>
+</body>
+<script>
+    // v-for不仅可以循环数组，还可以循环对象，使用方法基本和数组一样
+    const app = Vue.createApp({
+        data() {
+            return {
+                listArray: {
+                    GirlOne: '谢大脚',
+                    GirlTwo: '刘英',
+                    GirlThree: '晓红'
+                }
+            }
+        },
+        // 打开浏览器的控制台会发现DOM结构是有问题的，明明循环出两项，却有3个<div>，
+        // 而且这种外层套用<div>里边使用<li>的形式，不符合HTML语法的基本结构。
+        template: `
+        <ul>
+            <template
+                v-for="(item,index) in listArray"
+                :key="index+item"
+            >
+            <li v-if="item != '谢大脚'">
+                [{{index}}]{{item}}
+            </li>
+            </template>
+        </ul>
+        `
+        // 为了解决这个问题，Vue给我们提供了<template>模版标签，也就是一个空的占位符，
+        // 目的就是解决模板中为完成业务逻辑，而使用的无用html标签的现象。
+    })
+
+    app.mount("#app")
+</script>
+
+</html>
+
+<style>
+    .red {
+        color: red !important;
+    }
+
+    .green {
+        color: green;
+    }
+
+    .background {
+        background-color: orange;
+    }
+</style>

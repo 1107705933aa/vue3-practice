@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>模板动态参数</title>
+    <script src="https://unpkg.com/vue@next"></script>
+</head>
+
+<body>
+    <div id="app"></div>
+</body>
+<script>
+    const app = Vue.createApp({
+        data() {
+            return {
+                message: 'jspang.com',
+                name: 'title',
+                event: 'click'
+            }
+        },
+        methods: {
+            hanldClick() {
+                this.message = this.message == 'jspang.com' ? "技术胖" : "jspang.com"
+            }
+        },
+        // v-once，无论data中的数据如何变化，模板也不会再次重新渲染了
+        template: `<h2 
+                        @[event]="hanldClick"
+                        :[name]="message"
+                    > 
+                    {{message}}</h2>
+                    `
+    })
+    const vm = app.mount("#app")
+
+</script>
+
+</html>

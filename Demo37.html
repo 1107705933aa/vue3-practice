@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>textarea的数据双向绑定</title>
+    <script src="https://unpkg.com/vue@next" ></script>
+</head>
+<body>
+    <div id="app"></div>
+</body>
+<script>
+    const app=Vue.createApp({ 
+    data(){
+        return{}
+    },
+    methods:{
+
+    },
+    // 写textarea标签都是成对出现的，比如这样<textarea></textarea>，
+    // 如果想在Vue中实现textarea的双向数据绑定，这时候只要写单标签就可以了。
+    template:`
+            <div>
+                <div>{{name}}</div>
+                <div><input v-model="name" /></div>
+                <div><textarea v-model="name" /></div>  
+            </div>
+        ` 
+    }) 
+    const vm=app.mount("#app")
+
+</script>
+</html>

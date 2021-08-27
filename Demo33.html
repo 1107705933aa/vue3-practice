@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>capture修饰符</title>
+    <script src="https://unpkg.com/vue@next"></script>
+</head>
+
+<body>
+    <div id="app"></div>
+</body>
+<script>
+    const app = Vue.createApp({
+        data() {
+            return {
+                count: 0
+            }
+        },
+        methods: {
+            addCountClick() {
+                this.count++
+            },
+            handleBtnClick1() {
+                alert(1)
+            },
+        },
+        // prevent修饰符：阻止默然行为的修饰符，例如阻止form表单的默认提交行为。
+        // 默认的模式都是冒泡模式，也就是从下到上，用capture后，是从上到下的。
+        // 运行结果先有1，再count++。
+        template: `
+                <div @click.capture="handleBtnClick1">  //修改了此处
+                    我是最外层的DIV文字
+                    <div>目前已点佳丽数量{{count}}.</div>
+                    <button @click=" addCountClick()">增加一位佳丽</button>
+                </div>
+        `
+    })
+    const vm = app.mount("#app")
+
+</script>
+
+</html>

@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>监听器-watch</title>
+    <script src="https://unpkg.com/vue@next"></script>
+</head>
+
+<body>
+    <div id="app"></div>
+</body>
+<script>
+
+    const app = Vue.createApp({
+        data() {
+            return {
+                message: 'jspang.com',
+                price: 10,
+                count: 2,
+                newTotal: 20
+            }
+        },
+        watch: {
+            // method、watch和computed三者使用优先级
+            // computed 和 method都能实现的功能，建议使用computed,因为有缓存，不用渲染页面就刷新。
+            // computed 和 watch 都能实现的功能，建议使用 computed，因为更加简洁。
+            total(current, prev) {
+                console.log('watch changed')
+                console.log('现在的值：', current)
+                console.log('变化前的值：', prev)
+            },
+            count(current, prev) {
+                console.log('计算总和')
+                this.newTotal = this.price * current
+            }
+        },
+        // 侦听器和计算属性的区别
+        // 1.计算属性computed必须要返回一个值;
+        // 2.在页面渲染的同时就会执行里边的业务逻辑;
+        // 3.watch只有发生变化时才会执行;
+        computed: {
+            total() {
+                console.log('....count changed')
+                return this.price * this.count
+            },
+        },
+        methods: {
+            addCount() {
+                this.count++
+            }
+        },
+        template: ` 
+            <h2>总和：{{newTotal}}</h2>
+            <h2> {{total}}</h2>
+            <button @click="addCount">再买一个</button>
+        `
+    })
+    const vm = app.mount("#app")
+</script>
+
+</html>
